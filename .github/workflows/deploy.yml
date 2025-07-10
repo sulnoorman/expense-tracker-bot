@@ -1,0 +1,35 @@
+name: 🚀 Deploy to Armbian Server
+
+on:
+  push:
+    branches:
+      - main  # Or change to the branch you use
+
+jobs:
+  deploy:
+    name: Deploy via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ⬇️ Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🔐 Set up SSH
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: 🚀 SSH and deploy to server
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          cd ~/apps/expense-tracker-bot  # adjust this to your project path
+          git pull origin main
+          docker stop expense-tracker-bot || true
+          docker rm expense-tracker-bot || true
+          docker build -t expense-tracker-bot .
+          docker run -d \
+            --name expense-tracker-bot \
+            --env-file .env \
+            -p 5000:5000 \
+            expense-tracker-bot
+        EOF

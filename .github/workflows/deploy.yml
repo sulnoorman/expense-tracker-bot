@@ -11,6 +11,11 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
+      - name: 🔍 Debug secrets loaded (don't log them!)
+        run: |
+            if [ -z "${{ secrets.TS_OAUTH_CLIENT_ID }}" ]; then echo "Client ID is missing"; fi
+            if [ -z "${{ secrets.TS_OAUTH_SECRET }}" ]; then echo "Secret is missing"; fi
+            
       - name: 🛜 Start Tailscale
         uses: tailscale/github-action@v2
         with:

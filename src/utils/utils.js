@@ -69,7 +69,7 @@ function getCategoryColor(name, type = 'EXPENSE') {
 
 function isAlphabetOnly(input) {
   return /^[A-Za-z\s]+$/.test(input);
-}
+};
 
 module.exports = {
   formatRupiah,
@@ -77,4 +77,5 @@ module.exports = {
   normalize,
   generateColorFromCategory,
   getCategoryColor,
+  isAlphabetOnly,
 }

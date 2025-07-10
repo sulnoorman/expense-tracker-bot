@@ -19,8 +19,8 @@ jobs:
       - name: 🛜 Start Tailscale
         uses: tailscale/github-action@v2
         with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
+          oauth-client-id: knmavkeo4k11CNTRL
+          oauth-secret: tskey-client-knmavkeo4k11CNTRL-NZioZBfzJDgvTtXDRiksDgWTLAgk4DBpf
 
       - name: 🚀 SSH into server via Tailscale
         run: |

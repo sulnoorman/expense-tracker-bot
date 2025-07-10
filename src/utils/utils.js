@@ -18,31 +18,31 @@ const defaultCategories = {
   ]
 };
 
-export const formatRupiah = (value) => {
-    // Remove all non-digit characters (except commas if needed)
-    const numberOnly = value.toString().replace(/[^\d]/g, '');
+function formatRupiah(value) {
+  // Remove all non-digit characters (except commas if needed)
+  const numberOnly = value.toString().replace(/[^\d]/g, '');
 
-    if (!numberOnly) return '0';
+  if (!numberOnly) return '0';
 
-    const formatted = parseInt(numberOnly, 10).toLocaleString('id-ID');
-    return 'Rp' + formatted;
+  const formatted = parseInt(numberOnly, 10).toLocaleString('id-ID');
+  return 'Rp' + formatted;
 }
 
-export const toRawNumber = (value) => {
-    // Remove all dot separators
-    const raw = value.replace(/\./g, '');
+function toRawNumber(value) {
+  // Remove all dot separators
+  const raw = value.replace(/\./g, '');
 
-    // Parse to integer
-    const num = parseInt(raw, 10);
+  // Parse to integer
+  const num = parseInt(raw, 10);
 
-    return isNaN(num) ? null : num;
+  return isNaN(num) ? null : num;
 }
 
-const normalize = (str) => {
+function normalize(str) {
   return str.trim().toLowerCase();
 }
 
-const generateColorFromCategory = (name) => {
+function generateColorFromCategory(name) {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
@@ -57,7 +57,7 @@ const generateColorFromCategory = (name) => {
   return color;
 }
 
-export const getCategoryColor = (name, type = 'EXPENSE') => {
+function getCategoryColor(name, type = 'EXPENSE') {
   const normalized = normalize(name);
   const categoryList = defaultCategories[type.toUpperCase()] || [];
 
@@ -67,6 +67,14 @@ export const getCategoryColor = (name, type = 'EXPENSE') => {
   return generateColorFromCategory(name);
 }
 
-export const isAlphabetOnly = (input) => {
+function isAlphabetOnly(input) {
   return /^[A-Za-z\s]+$/.test(input);
+}
+
+module.exports = {
+  formatRupiah,
+  toRawNumber,
+  normalize,
+  generateColorFromCategory,
+  getCategoryColor,
 }

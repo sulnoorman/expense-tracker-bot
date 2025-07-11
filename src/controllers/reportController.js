@@ -32,7 +32,7 @@ class ReportController {
                     expensesByCategory.push(`• ${category}: ${formatRupiah(amount)}`);
                 });
             } else {
-                expensesByCategory = '• No expenses recorded';
+                expensesByCategory.push('• No expenses recorded');
             }
 
             // Format income by category
@@ -42,7 +42,7 @@ class ReportController {
                     incomeByCategory.push(`• ${category}: ${formatRupiah(amount)}`);
                 });
             } else {
-                incomeByCategory = '• No income recorded';
+                incomeByCategory.push('• No income recorded');
             }
 
             // Status message
@@ -67,7 +67,6 @@ ${incomeByCategory.map((item) => item).join('\n')}
 
 📊 *Expenses by Category:*
 ${expensesByCategory.map((item) => item).join('\n')}
-
 
 📅 *Period:* ${monthName.slice(0, 3)} 01 - ${monthName.slice(0, 3)} ${new Date(currentYear, currentMonth, 0).getDate()}, ${currentYear}
 📝 *Total Transactions:* ${report.transactions.length}

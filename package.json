@@ -30,12 +30,14 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.1.0",
+    "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",
     "morgan": "^1.10.0",
     "node-telegram-bot-api": "^0.66.0",
+    "path": "^0.12.7",
     "prisma": "^6.1.0"
   },
   "devDependencies": {
@@ -45,4 +47,3 @@
     "seed": "node prisma/seed.js"
   }
 }
-

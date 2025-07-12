@@ -1,12 +1,29 @@
 const express = require('express');
-const router = express.Router();
+const path = require('path');
+const { exec } = require('child_process');
 const botService = require('../services/botService');
+
+const router = express.Router();
+
+// Webhook for github webhook
+router.post('/github/test', async (req, res) => {
+    console.log('📦 GitHub Webhook received!')
+    let shellFilePath = path.resolve((__dirname, './deploy.sh'));
+    exec(shellFilePath, (err, stdout, stderr) => {
+        if (err) {
+            console.error('❌ Deploy failed:', stderr);
+            return res.status(500).send('Deploy failed with this error:' + '\n' + stderr);
+        }
+        console.log('✅ Deploy successful:', stdout);
+        res.send('Deployed!');
+    })
+})
 
 // Telegram webhook endpoint
 router.post('/telegram', async (req, res) => {
     try {
         const update = req.body;
-        
+
         // Log incoming update (remove in production)
         if (process.env.NODE_ENV === 'development') {
             // console.log('📨 Received Telegram update:', JSON.stringify(update, null, 2));
@@ -14,7 +31,7 @@ router.post('/telegram', async (req, res) => {
 
         // Process the update
         await botService.processUpdate(update);
-        
+
         // Respond with 200 OK
         res.status(200).json({ status: 'ok' });
     } catch (error) {
@@ -27,13 +44,13 @@ router.post('/telegram', async (req, res) => {
 router.post('/telegram/set-webhook', async (req, res) => {
     try {
         const { url } = req.body;
-        
+
         if (!url) {
             return res.status(400).json({ error: 'URL is required' });
         }
 
         const success = await botService.setWebhook(url);
-        
+
         if (success) {
             res.json({ status: 'success', message: 'Webhook set successfully', url });
         } else {
@@ -48,7 +65,7 @@ router.post('/telegram/set-webhook', async (req, res) => {
 router.delete('/telegram/webhook', async (req, res) => {
     try {
         const success = await botService.deleteWebhook();
-        
+
         if (success) {
             res.json({ status: 'success', message: 'Webhook deleted successfully' });
         } else {
@@ -63,7 +80,7 @@ router.delete('/telegram/webhook', async (req, res) => {
 router.get('/telegram/webhook-info', async (req, res) => {
     try {
         const info = await botService.getWebhookInfo();
-        
+
         if (info) {
             res.json({ status: 'success', webhookInfo: info });
         } else {

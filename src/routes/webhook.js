@@ -12,7 +12,11 @@ router.post('/github', async (req, res) => {
     exec(shellFilePath, (err, stdout, stderr) => {
         if (err) {
             console.error('❌ Deploy failed:', stderr);
-            return res.status(500).send('Deploy failed with this error:' + '\n' + stderr);
+            return res.status(500).json({
+                status: 500,
+                filePath: shellFilePath,
+                message: 'Deploy failed with this error:' + '\n' + stderr,
+            })
         }
         console.log('✅ Deploy successful:', stdout);
         res.send('Deployed!');

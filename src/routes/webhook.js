@@ -6,7 +6,7 @@ const botService = require('../services/botService');
 const router = express.Router();
 
 // Webhook for github webhook
-router.post('/github/test', async (req, res) => {
+router.post('/github', async (req, res) => {
     console.log('📦 GitHub Webhook received!')
     let shellFilePath = path.resolve((__dirname, './deploy.sh'));
     exec(shellFilePath, (err, stdout, stderr) => {

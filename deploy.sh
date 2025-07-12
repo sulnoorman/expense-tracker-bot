@@ -25,7 +25,7 @@ docker run -d --name duit-tracker \
 echo "✅ Deploy complete!" | tee -a $LOGFILE
 
 # Wait for the server to respond on port 5000
-until curl -s --head http://localhost:5000 | grep "200 OK" > /dev/null; do
+until curl -s --head http://localhost:5000/health | grep "200 OK" > /dev/null; do
   echo "⏳ Waiting for container to be ready..."
   sleep 2
 done

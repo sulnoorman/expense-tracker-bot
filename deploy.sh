@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /DATA/Storage/MyProject/expense_tracker_bot || exit 1
-LOGFILE="/DATA/MyProject/expense_tracker_bot/deploy.log"
+LOGFILE="/DATA/Storage/MyProject/expense_tracker_bot/deploy.log"
 
 echo "===================" >> $LOGFILE
 echo "📅 $(date)" >> $LOGFILE

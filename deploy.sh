@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /DATA/MyProject/expense_tracker_bot || exit 1
+cd /DATA/Storage/MyProject/expense_tracker_bot || exit 1
 LOGFILE="/DATA/MyProject/expense_tracker_bot/deploy.log"
 
 echo "===================" >> $LOGFILE
@@ -23,3 +23,13 @@ docker run -d --name duit-tracker \
   duit-tracker >> $LOGFILE 2>&1
 
 echo "✅ Deploy complete!" | tee -a $LOGFILE
+
+echo "Set Webhook URL"
+
+curl --location 'https://tele-bot.noerlab.my.id/webhook/telegram/set-webhook' \
+--header 'Content-Type: application/json' \
+--data '{
+    "url": "https://tele-bot.noerlab.my.id/webhook/telegram"
+}'
+
+echo "✅ Set Webhook URL completed!"

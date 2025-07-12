@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/github', async (req, res) => {
     console.log('📦 GitHub Webhook received!')
     let shellFilePath = path.resolve((__dirname, './deploy.sh'));
+    console.log('shell path', shellFilePath);
     exec(shellFilePath, (err, stdout, stderr) => {
         if (err) {
             console.error('❌ Deploy failed:', stderr);

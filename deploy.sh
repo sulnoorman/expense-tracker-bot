@@ -24,12 +24,18 @@ docker run -d --name duit-tracker \
 
 echo "✅ Deploy complete!" | tee -a $LOGFILE
 
-echo "Set Webhook URL"
+# Wait for the server to respond on port 5000
+until curl -s --head http://localhost:5000 | grep "200 OK" > /dev/null; do
+  echo "⏳ Waiting for container to be ready..."
+  sleep 2
+done
 
+echo "🚀 Container is ready! Setting webhook..."
 curl --location 'https://tele-bot.noerlab.my.id/webhook/telegram/set-webhook' \
 --header 'Content-Type: application/json' \
 --data '{
     "url": "https://tele-bot.noerlab.my.id/webhook/telegram"
 }'
 
-echo "✅ Set Webhook URL completed!"
+echo "✅ Webhook set!"
+

@@ -5,6 +5,7 @@ A comprehensive Telegram bot for tracking personal expenses and income, built wi
 ## 🌟 Features
 
 ### Core Functionality
+
 - **User Management**: Automatic user registration and profile management
 - **Expense Tracking**: Add expenses with categories, amounts, and descriptions
 - **Income Recording**: Track income from various sources with categorization
@@ -14,6 +15,7 @@ A comprehensive Telegram bot for tracking personal expenses and income, built wi
 - **Monthly Reporting**: Comprehensive monthly financial summaries with category breakdowns
 
 ### User Experience
+
 - **Interactive Interface**: Inline keyboards for easy navigation
 - **Conversation Flow**: Guided step-by-step process for adding transactions
 - **Error Handling**: Comprehensive error handling with user-friendly messages
@@ -22,6 +24,7 @@ A comprehensive Telegram bot for tracking personal expenses and income, built wi
 - **Quick Actions**: Fast access to common functions via inline buttons
 
 ### Technical Features
+
 - **Express.js Backend**: RESTful API with webhook support
 - **Prisma ORM**: Type-safe database operations with migrations
 - **SQLite Database**: Lightweight database with easy deployment
@@ -31,21 +34,22 @@ A comprehensive Telegram bot for tracking personal expenses and income, built wi
 
 ## 🛠 Technology Stack
 
-| Component | Technology | Version |
-|-----------|------------|---------|
-| Runtime | Node.js | 18.x+ |
-| Framework | Express.js | 4.21.2 |
-| Database ORM | Prisma | 6.1.0 |
-| Database | MariaDB | 10.6+ |
-| Bot Framework | node-telegram-bot-api | 0.66.0 |
-| Environment | dotenv | 16.4.7 |
-| Security | Helmet.js | 8.0.0 |
-| CORS | cors | 2.8.5 |
-| Logging | Morgan | 1.10.0 |
+| Component     | Technology            | Version |
+| ------------- | --------------------- | ------- |
+| Runtime       | Node.js               | 18.x+   |
+| Framework     | Express.js            | 4.21.2  |
+| Database ORM  | Prisma                | 6.1.0   |
+| Database      | MariaDB               | 10.6+   |
+| Bot Framework | node-telegram-bot-api | 0.66.0  |
+| Environment   | dotenv                | 16.4.7  |
+| Security      | Helmet.js             | 8.0.0   |
+| CORS          | cors                  | 2.8.5   |
+| Logging       | Morgan                | 1.10.0  |
 
 ## 📋 Prerequisites
 
 ### System Requirements
+
 - **Node.js**: Version 18.x or higher
 - **npm**: Version 8.x or higher
 - **MariaDB**: Version 10.6 or higher
@@ -54,6 +58,7 @@ A comprehensive Telegram bot for tracking personal expenses and income, built wi
 - **Network**: Internet connectivity for Telegram API
 
 ### Required Accounts
+
 1. **Telegram Bot Token**:
    - Message @BotFather on Telegram
    - Create a new bot using `/newbot`
@@ -146,17 +151,17 @@ curl -X POST http://localhost:3000/webhook/telegram/set-webhook \
 
 ### Bot Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/start` | Initialize bot and create account | `/start` |
-| `/help` | Show help and command list | `/help` |
-| `/expense` | Add a new expense | `/expense` |
-| `/income` | Add new income | `/income` |
-| `/balance` | View current balance | `/balance` |
-| `/list` | View recent transactions | `/list` |
-| `/categories` | View all categories | `/categories` |
-| `/report` | Generate monthly report | `/report` |
-| `/cancel` | Cancel current operation | `/cancel` |
+| Command       | Description                       | Example       |
+| ------------- | --------------------------------- | ------------- |
+| `/start`      | Initialize bot and create account | `/start`      |
+| `/help`       | Show help and command list        | `/help`       |
+| `/expense`    | Add a new expense                 | `/expense`    |
+| `/income`     | Add new income                    | `/income`     |
+| `/balance`    | View current balance              | `/balance`    |
+| `/list`       | View recent transactions          | `/list`       |
+| `/categories` | View all categories               | `/categories` |
+| `/report`     | Generate monthly report           | `/report`     |
+| `/cancel`     | Cancel current operation          | `/cancel`     |
 
 ### Adding Expenses
 
@@ -185,6 +190,7 @@ curl -X POST http://localhost:3000/webhook/telegram/set-webhook \
 ### Tables
 
 #### Users
+
 ```sql
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -198,6 +204,7 @@ CREATE TABLE users (
 ```
 
 #### Categories
+
 ```sql
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -212,6 +219,7 @@ CREATE TABLE categories (
 ```
 
 #### Transactions
+
 ```sql
 CREATE TABLE transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -233,6 +241,7 @@ CREATE TABLE transactions (
 ### Default Categories
 
 #### Expense Categories
+
 - Food & Dining
 - Transportation
 - Shopping
@@ -243,6 +252,7 @@ CREATE TABLE transactions (
 - Other
 
 #### Income Categories
+
 - Salary
 - Freelance
 - Investment
@@ -252,12 +262,15 @@ CREATE TABLE transactions (
 ## 🔧 API Endpoints
 
 ### Health Check
+
 ```
 GET /health
 ```
+
 Returns server status and uptime information.
 
 ### Webhook Management
+
 ```
 POST /webhook/telegram/set-webhook
 DELETE /webhook/telegram/webhook
@@ -266,9 +279,11 @@ GET /webhook/telegram/status
 ```
 
 ### Telegram Webhook
+
 ```
 POST /webhook/telegram
 ```
+
 Receives updates from Telegram Bot API.
 
 ## 🧪 Testing
@@ -286,6 +301,7 @@ node test-database.js
 ### Test Coverage
 
 The test suite covers:
+
 - Database connection and Prisma integration
 - User registration and management
 - Category creation and retrieval
@@ -298,15 +314,15 @@ The test suite covers:
 
 ## 📦 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm start` | Start production server |
-| `npm run dev` | Start development server with auto-restart |
-| `npm run db:generate` | Generate Prisma client |
-| `npm run db:migrate` | Run database migrations |
-| `npm run db:seed` | Seed database with default data |
-| `npm run db:studio` | Open Prisma Studio (database GUI) |
-| `npm run db:reset` | Reset database (⚠️ destructive) |
+| Script                | Description                                |
+| --------------------- | ------------------------------------------ |
+| `npm start`           | Start production server                    |
+| `npm run dev`         | Start development server with auto-restart |
+| `npm run db:generate` | Generate Prisma client                     |
+| `npm run db:migrate`  | Run database migrations                    |
+| `npm run db:seed`     | Seed database with default data            |
+| `npm run db:studio`   | Open Prisma Studio (database GUI)          |
+| `npm run db:reset`    | Reset database (⚠️ destructive)            |
 
 ## 🚀 Deployment
 
@@ -321,11 +337,12 @@ The test suite covers:
 #### Option 1: Traditional Server
 
 1. **Server Setup**:
+
    ```bash
    # Install Node.js and npm
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install -y nodejs
-   
+
    # Clone and setup application
    git clone <repository-url>
    cd telegram-expense-bot-express
@@ -333,6 +350,7 @@ The test suite covers:
    ```
 
 2. **Environment Configuration**:
+
    ```bash
    # Create production environment file
    cp .env.example .env
@@ -340,16 +358,18 @@ The test suite covers:
    ```
 
 3. **Database Setup**:
+
    ```bash
    npm run db:migrate
    npm run db:seed
    ```
 
 4. **Process Management with PM2**:
+
    ```bash
    # Install PM2
    npm install -g pm2
-   
+
    # Start application
    pm2 start src/server.js --name expense-tracker-bot
    pm2 save
@@ -366,6 +386,7 @@ The test suite covers:
 #### Option 2: Docker Deployment
 
 1. **Create Dockerfile**:
+
    ```dockerfile
    FROM node:18-alpine
    WORKDIR /usr/src/app
@@ -386,6 +407,7 @@ The test suite covers:
 #### Option 3: Cloud Platforms
 
 **Heroku**:
+
 ```bash
 # Add Procfile
 echo "web: node src/server.js" > Procfile
@@ -401,16 +423,19 @@ git push heroku main
 ## 🔒 Security Considerations
 
 ### Environment Variables
+
 - Never commit `.env` files to version control
 - Use strong, unique bot tokens
 - Rotate tokens periodically
 
 ### Database Security
+
 - Use proper file permissions for SQLite database
 - Consider encryption for sensitive data
 - Regular backups
 
 ### Server Security
+
 - Use HTTPS in production
 - Implement rate limiting
 - Keep dependencies updated
@@ -419,6 +444,7 @@ git push heroku main
 ## 🔍 Monitoring and Maintenance
 
 ### Health Checks
+
 ```bash
 # Check server health
 curl http://localhost:3000/health
@@ -428,6 +454,7 @@ curl http://localhost:3000/webhook/telegram/status
 ```
 
 ### Logs
+
 ```bash
 # View PM2 logs
 pm2 logs expense-tracker-bot
@@ -437,6 +464,7 @@ tail -f logs/app.log
 ```
 
 ### Database Maintenance
+
 ```bash
 # View database with Prisma Studio
 npm run db:studio
@@ -450,22 +478,26 @@ cp dev.db backup-$(date +%Y%m%d).db
 ### Common Issues
 
 #### Bot Not Responding
+
 1. Check bot token in `.env` file
 2. Verify webhook is set correctly
 3. Check server logs for errors
 4. Ensure server is accessible from internet
 
 #### Database Errors
+
 1. Check database file permissions
 2. Run migrations: `npm run db:migrate`
 3. Verify Prisma client is generated: `npm run db:generate`
 
 #### Webhook Issues
+
 1. Verify webhook URL is accessible
 2. Check SSL certificate (HTTPS required)
 3. Review webhook info: `GET /webhook/telegram/webhook-info`
 
 ### Debug Mode
+
 Set `NODE_ENV=development` to enable detailed logging.
 
 ## 🤝 Contributing
@@ -492,6 +524,7 @@ This project is licensed under the ISC License - see the LICENSE file for detail
 ## 📞 Support
 
 For support, please:
+
 1. Check the troubleshooting section
 2. Review the documentation
 3. Open an issue on GitHub
@@ -499,8 +532,10 @@ For support, please:
 
 ---
 
-----------------------------------------------
-### Catatan
+---
+
+### Notes
+
 1. Flow Expense, View Balance, dan Help
 
 - Flow Expense perlu dicek dan disesuaikan dengan kebutuhan (Done)
@@ -508,11 +543,23 @@ For support, please:
 - Flow View Transaction perlu dicek dan disesuaikan dengan kebutuhan (Done)
 - Flow Report perlu dicek dan disesuaikan dengan kebutuhan (Done)
 - Flow Help perlu dicek dan disesuaikan dengan kebutuhan (Done)
+
 2. Database categories dibuat menjadi master table, dan dibuat many to many dengan table users. (Done)
 3. Add add custom categories function. (Done)
-----------------------------------------------
+
+---
+
+### Request Feature
+
+💰🎉🚀💸❓📊🏠❌📋🏷️📈🗓️💵
+
+fitur masukan bot:
+
+1. Fitur tabung dari mas azis. Flow:
+   - Masukkan Target jumlah tabungan dan tanggal kebutuhan tabungan.
+   - Masukkan penghasilan per bulan.
+   - Outputnya adalah bisa mengetahui berapa besar uang yang harus ditabung untuk mencapai target tersebut dalam harian, mingguan, dan bulanan.
 
 **Built with ❤️ by Manus AI**
 
-*Version 1.0.0 - Express.js + Prisma Edition Vibe Coding bruhhh!!!*
-
+_Version 1.0.0 - Express.js + Prisma Edition Vibe Coding bruhhh!!!_

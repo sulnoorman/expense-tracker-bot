@@ -27,10 +27,6 @@ COPY --from=build /app/src ./src
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/node_modules ./node_modules
 
-# ✅ Copy deploy.sh script and make it executable
-COPY ./deploy.sh ./deploy.sh
-RUN chmod +x deploy.sh
-
 # Environment
 ENV NODE_ENV=production
 

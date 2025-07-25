@@ -5,25 +5,6 @@ const botService = require('../services/botService');
 
 const router = express.Router();
 
-// Webhook for github webhook
-router.post('/github', async (req, res) => {
-    console.log('📦 GitHub Webhook received!')
-    let shellFilePath = path.resolve((__dirname, './deploy.sh'));
-    console.log('shell path', shellFilePath);
-    exec(shellFilePath, (err, stdout, stderr) => {
-        if (err) {
-            console.error('❌ Deploy failed:', stderr);
-            return res.status(500).json({
-                status: 500,
-                filePath: shellFilePath,
-                message: 'Deploy failed with this error:' + '\n' + stderr,
-            })
-        }
-        console.log('✅ Deploy successful:', stdout);
-        res.send('Deployed!');
-    })
-})
-
 // Telegram webhook endpoint
 router.post('/telegram', async (req, res) => {
     try {

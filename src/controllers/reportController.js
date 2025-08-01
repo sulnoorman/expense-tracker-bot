@@ -1,3 +1,4 @@
+const generateClassicReceiptReport = require("../utils/generateTransactionImage");
 const { formatRupiah } = require("../utils/utils");
 
 class ReportController {

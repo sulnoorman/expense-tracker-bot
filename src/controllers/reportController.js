@@ -97,6 +97,32 @@ ${statusMessage}
             await bot.sendMessage(chatId, '❌ Sorry, something went wrong while generating your report. Please try again.');
         }
     }
+
+    static async handleReportImage(bot, msg, database) {
+        const chatId = msg.chat.id;
+
+        try {
+            // Get user from database
+            const user = await database.getUserByTelegramId(chatId);
+            if (!user) {
+                await bot.sendMessage(chatId, '❌ User not found. Please use /start to initialize your account.');
+                return;
+            }
+
+            // Generate the classic receipt report
+            const imageBuffer = await generateClassicReceiptReport();
+
+            // Send the image
+            await bot.sendPhoto(chatId, imageBuffer, {
+                caption: '📄 Here is your classic receipt report for the month.',
+                parse_mode: 'Markdown'
+            });
+
+        } catch (error) {
+            console.error('Error generating report image:', error);
+            await bot.sendMessage(chatId, '❌ Sorry, something went wrong while generating your report image. Please try again.');
+        }
+    }
 }
 
 module.exports = ReportController;

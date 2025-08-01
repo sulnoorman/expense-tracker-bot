@@ -78,6 +78,7 @@ class BotService {
         this.bot.onText(/\/list/, (msg) => this.handleList(msg));
         this.bot.onText(/\/categories/, (msg) => this.handleCategories(msg));
         this.bot.onText(/\/report/, (msg) => this.handleReport(msg));
+        this.bot.onText(/\/report-image/, (msg) => this.handleReport(msg));
 
         // Handle callback queries (inline keyboard responses)
         this.bot.on('callback_query', (query) => this.handleCallbackQuery(query));
@@ -161,6 +162,15 @@ class BotService {
     async handleReport(msg) {
         try {
             await reportController.handle(this.bot, msg, this.database);
+        } catch (error) {
+            console.error('Error in report command:', error);
+            await this.sendErrorMessage(msg.chat.id);
+        }
+    }
+
+    async handleReportImage(msg) {
+        try {
+            await reportController.handleReportImage(this.bot, msg, this.database);
         } catch (error) {
             console.error('Error in report command:', error);
             await this.sendErrorMessage(msg.chat.id);

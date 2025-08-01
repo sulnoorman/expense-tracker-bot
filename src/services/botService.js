@@ -78,7 +78,7 @@ class BotService {
         this.bot.onText(/\/list/, (msg) => this.handleList(msg));
         this.bot.onText(/\/categories/, (msg) => this.handleCategories(msg));
         this.bot.onText(/\/report/, (msg) => this.handleReport(msg));
-        this.bot.onText(/\/report-image/, (msg) => this.handleReport(msg));
+        this.bot.onText(/\/image/, (msg) => this.handleReportImage(msg));
 
         // Handle callback queries (inline keyboard responses)
         this.bot.on('callback_query', (query) => this.handleCallbackQuery(query));

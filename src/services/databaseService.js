@@ -204,7 +204,7 @@ class DatabaseService {
         }
     }
 
-    async getTransactionsByUser(userId, limit = 10, offset = 0) {
+    async getTransactionsByUser(userId, limit = undefined, offset = 0) {
         try {
             const transactions = await this.prisma.transaction.findMany({
                 where: { userId: userId },

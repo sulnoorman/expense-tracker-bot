@@ -18,14 +18,15 @@ const defaultCategories = {
   ]
 };
 
-function formatRupiah(value) {
+function formatRupiah(value, withPrefix = true) {
   // Remove all non-digit characters (except commas if needed)
   const numberOnly = value.toString().replace(/[^\d]/g, '');
 
   if (!numberOnly) return '0';
 
   const formatted = parseInt(numberOnly, 10).toLocaleString('id-ID');
-  return 'Rp' + formatted;
+  const result = withPrefix ? 'Rp' + formatted : formatted;
+  return result;
 }
 
 function toRawNumber(value) {

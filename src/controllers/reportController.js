@@ -1,5 +1,5 @@
-const generateClassicReceiptReport = require("../utils/generateTransactionImage");
 const { formatRupiah } = require("../utils/utils");
+const generateTransationImage = require("../utils/generateTransactionImage");
 
 class ReportController {
     static async handle(bot, msg, database) {
@@ -110,8 +110,11 @@ ${statusMessage}
                 return;
             }
 
+            const transactions = await database.getTransactionsByUser(user.id);
+            const transactionsMaped = transactions.map((transaction) => ({ description: transaction.description, amount: transaction.amount, ...transaction }))
+
             // Generate the classic receipt report
-            const imageBuffer = await generateClassicReceiptReport();
+            const imageBuffer = await generateTransationImage(transactionsMaped);
 
             // Send the image
             await bot.sendPhoto(chatId, imageBuffer, {

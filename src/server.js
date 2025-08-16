@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(helmet());
@@ -62,6 +62,7 @@ async function startServer() {
 
         // Start Express server
         app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Hello Guyss!`);
             console.log(`🚀 Server running on port ${PORT}`);
             console.log(`📱 Bot is ready to receive messages...`);
             console.log(`🌐 Health check: http://localhost:${PORT}/health`);

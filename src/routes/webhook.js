@@ -1,6 +1,4 @@
 const express = require('express');
-const path = require('path');
-const { exec } = require('child_process');
 const botService = require('../services/botService');
 
 const router = express.Router();

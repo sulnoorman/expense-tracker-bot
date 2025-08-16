@@ -62,6 +62,7 @@ async function startServer() {
 
         // Start Express server
         app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Hello Guyss!`);
             console.log(`🚀 Server running on port ${PORT}`);
             console.log(`📱 Bot is ready to receive messages...`);
             console.log(`🌐 Health check: http://localhost:${PORT}/health`);

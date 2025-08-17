@@ -1,5 +1,10 @@
 # --- Build Stage ---
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
+
+# Install build tools (needed for node-canvas to compile)
+RUN apk add --no-cache \
+  python3 make g++ \
+  cairo-dev jpeg-dev pango-dev giflib-dev librsvg-dev pixman-dev
 
 WORKDIR /app
 
@@ -14,7 +19,12 @@ COPY . .
 RUN npx prisma generate
 
 # --- Production Stage ---
-FROM node:18-alpine AS production
+FROM node:20-alpine AS prod
+
+# Install only runtime libs (no compilers here)
+RUN apk add --no-cache \
+  cairo jpeg pango giflib librsvg pixman \
+  fontconfig ttf-dejavu
 
 WORKDIR /app
 

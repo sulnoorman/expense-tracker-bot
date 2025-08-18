@@ -1,4 +1,4 @@
-# --- Build Stage ---
+# --- Build Stage Dockerfile---
 FROM node:20-alpine AS build
 
 # Install build tools (needed for node-canvas to compile)

@@ -1,48 +1,36 @@
-# --- Build Stage Dockerfile---
-FROM node:20-alpine AS build
+# Optimized Dockerfile for Canvas Package
+# This approach minimizes final image size by removing build tools after installation
 
-# Install build tools (needed for node-canvas to compile)
+FROM node:20-alpine
+
+# Install build tools and runtime libraries
 RUN apk add --no-cache \
   python3 make g++ \
-  cairo-dev jpeg-dev pango-dev giflib-dev librsvg-dev pixman-dev
-
-WORKDIR /app
-
-# Install dependencies, including dev dependencies for building native modules like canvas
-COPY package*.json ./
-RUN npm install
-
-# Copy source files
-COPY . .
-
-# Generate Prisma client
-RUN npx prisma generate
-
-# --- Production Stage ---
-FROM node:20-alpine AS prod
-
-# Install only runtime libs (no compilers here)
-RUN apk add --no-cache \
+  cairo-dev jpeg-dev pango-dev giflib-dev librsvg-dev pixman-dev \
   cairo jpeg pango giflib librsvg pixman \
   fontconfig ttf-dejavu
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json to install only production dependencies
+# Copy package files first for better Docker layer caching
 COPY package*.json ./
-RUN npm ci --omit=dev
 
-# Copy built node_modules from the build stage
-COPY --from=build /app/node_modules ./node_modules
+# Install dependencies and then remove build tools to reduce image size
+RUN npm ci --omit=dev && \
+  apk del python3 make g++ \
+  cairo-dev jpeg-dev pango-dev giflib-dev librsvg-dev pixman-dev
 
-# Copy built files, Prisma client, and environment config
-COPY --from=build /app/src ./src
-COPY --from=build /app/prisma ./prisma
+# Generate Prisma client
+COPY prisma ./prisma
+RUN npx prisma generate
+
+# Copy source files
+COPY src ./src
 
 # Environment
 ENV NODE_ENV=production
 
-# Optional: expose port if needed
+# Expose port
 EXPOSE 5000
 
 # Start app

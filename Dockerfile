@@ -24,6 +24,9 @@ RUN npm ci --omit=dev && \
 COPY prisma ./prisma
 RUN npx prisma generate
 
+# Copy fonts directory
+COPY fonts ./fonts
+
 # Copy source files
 COPY src ./src
 
@@ -35,3 +38,4 @@ EXPOSE 5000
 
 # Start app
 CMD ["node", "src/server.js"]
+
